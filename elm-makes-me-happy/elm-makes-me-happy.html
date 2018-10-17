@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="structpres.css"/>
+    <script src="structpres.js"></script>
+    <title>Elm makes me happy</title>
+</head>
+
+<body id="body">
+
+<div class="slide title">
+<h1>Elm makes me happy</h1>
+
+<address>Andy Balaam<br/>
+<a href="http://www.artificialworlds.net/blog">artificialworlds.net/blog</a></address>
+</div>
+
+<a name="contents"></a>
+<div class="slide contents">
+<div class="slide_body">
+<h1>Contents</h1>
+<p>Elm is</p>
+<ul>
+    <li><a class="go_to_slide" href="#slide_1">Immediate</a></li>
+    <li><a class="go_to_slide" href="#slide_8">Clean</a></li>
+    <li><a class="go_to_slide" href="#slide_15">Frustrating</a></li>
+    <li><a class="go_to_slide" href="#slide_19">Rewarding</a></li>
+</ul>
+</div>
+</div>
+
+<a name="slide_1"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<div class="canvas"><div id="mousepos" style="width: 100%; height: 2em;"></div></div>
+<script src="mousepos.js"></script>
+<script type="text/javascript">
+var mousepos = document.getElementById( "mousepos" );
+Elm.embed( Elm.MousePos, mousepos );
+</script>
+<code>import Mouse
+import Graphics.Element exposing ( show )
+
+main = Signal.map show Mouse.position</code>
+</div>
+</div>
+
+<a name="slide_2"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<code>&gt; 3 + 5
+<em>8</em> : number
+
+&gt; "Hello!"
+<em>"Hello!"</em> : String
+</code>
+</div>
+</div>
+
+<a name="slide_3"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<code>&gt; x = 3
+<em>3</em> : number
+
+&gt; x + 2
+<em>5</em> : number
+</code>
+</div>
+</div>
+
+<a name="slide_4"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<code>&gt; double x = x * 2
+<em>&lt;function&gt;</em> : number -&gt; number
+
+&gt; double 4
+<em>8</em> : number
+</code>
+</div>
+</div>
+
+<a name="slide_5"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<code>&gt; sum_of_squares a b = a^2 + b^2
+<em>&lt;function&gt;</em> : number -&gt; number -&gt; number
+
+&gt; sum_of_squares 3 4
+<em>25</em> : number
+</code>
+</div>
+</div>
+
+<a name="slide_6"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<div class="canvas"><div id="eyes" style="display: inline-block;"></div></div>
+<script src="eyes.js"></script>
+<script type="text/javascript">
+var eyes = document.getElementById( "eyes" );
+Elm.embed( Elm.Eyes, eyes );
+</script>
+<code>main = Signal.map scene Mouse.position
+
+scene ( x, y ) = collage 400 100
+    [ outlined defaultLine ( circle 20 )
+    , move
+        ( eyePos 0.05 x -200, -1 * eyePos 0.15 y -50 )
+        ( filled black ( circle 10 ) ) ]
+
+eyePos scale x off = scale * ( off + toFloat x )
+</code>
+
+</div>
+</div>
+
+<a name="slide_7"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<code class="cmdline"><span class="prompt">$</span> sudo apt-get install nodejs-legacy
+<span class="prompt">$</span> sudo npm install -g elm
+<span class="prompt">$</span> echo "<span style="color: #66cccc">import Mouse
+import Graphics.Element exposing ( show )
+main = Signal.map show Mouse.position</span>" &gt; Main.elm 
+<span class="prompt">$</span> elm-reactor &amp;
+<span class="prompt">$</span> firefox localhost:8000/Main.elm &amp;
+</code>
+<div class="image"><img src="firefox-mousepos.png"/></div>
+</div>
+</div>
+
+<a name="slide_8"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<div class="canvas"><div id="validation"></div></div>
+<script src="validation.js"></script>
+<script type="text/javascript">
+var validation = document.getElementById( "validation" );
+Elm.embed( Elm.Validation, validation );
+</script>
+</div>
+</div>
+
+<a name="slide_9"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<div class="image"><img style="width: 80%" src="model-view-update.svg"/></div>
+</div>
+</div>
+
+<a name="slide_10"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<code>type alias <em>Model</em> =
+    { email1 : String
+    , email2 : String
+    }
+
+model =
+    { email1 = ""
+    , email2 = ""
+    }
+</code>
+</div>
+</div>
+
+<a name="slide_11"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<code><em>view</em> address model =
+...
+    div
+        []
+        [ button
+            [ submitDisabled model ]
+            [ text "Submit" ]
+        ]
+...
+</code>
+</div>
+</div>
+
+<a name="slide_12"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<code>submitDisabled model =
+    disabled (
+        validEmail model.email1 &amp;&amp;
+        model.email1 == model.email2 )
+
+validEmail string =
+    contains "@" string
+</code>
+</div>
+</div>
+
+<a name="slide_13"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<code>type Action =
+    Email1Changed String |
+    Email2Changed String
+
+<em>update</em> action model =
+    case action of
+        Email1Changed s -&gt;
+            { model | email1 = s }
+
+        Email2Changed s -&gt;
+            { model | email2 = s }
+</code>
+</div>
+</div>
+
+<a name="slide_14"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Clean</h1>
+<ul>
+    <li>Everything you care about is in the Model</li>
+    <li>Everything you see is in view</li>
+    <li>Everything that can happen is in update</li>
+    <li>No more guesswork</li>
+</ul>
+</div>
+</div>
+
+<a name="slide_15"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Frustrating</h1>
+<code>-- TYPE MISMATCH ----------------- Frustration.elm
+
+Function `myfn` is expecting 1 argument, but was given 2.
+
+2│     myfn 3 4
+              ^
+Maybe you forgot some parentheses? Or a comma?
+
+Detected errors in 1 module.  
+</code>
+</div>
+</div>
+
+<a name="slide_16"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Frustrating</h1>
+<code>-- BAD MAIN TYPE ----------------- Frustration.elm
+
+The 'main' value has an unsupported type.
+
+2│ main = 1 + 1
+   ^^^^^^^^^^^^
+I need an Element, Html, (Signal Element), or (Signal Html)
+so I can render it on screen, but you gave me:
+
+   number
+
+Detected errors in 1 module.      
+</code>
+</div>
+</div>
+
+<a name="slide_17"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Frustrating</h1>
+<code>-- TYPE MISMATCH ------------------ Validation.elm
+
+The 1st argument to function `message` is causing
+a mismatch.
+
+39│  Signal.message 3 address (action str)
+                    ^
+Function `message` is expecting the 1st argument to be:
+
+    Signal.Address a
+
+But it is:
+
+    number</code>
+</div>
+</div>
+
+<a name="slide_18"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Frustrating</h1>
+<code>Success! Compiled 1 modules.</code>
+</div>
+</div>
+
+<a name="slide_19"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Rewarding</h1>
+<code>Success! Compiled 1 modules.</code>
+<div class="image"><img style="height: 10em;" src="i-carry-guns.jpg"/></div>
+</div>
+</div>
+
+<a name="slide_20"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Rewarding</h1>
+<code>&gt; List.map double [1..3]
+<em>[2,4,6]</em> : List number
+
+&gt; List.map (\x -&gt; x^2) [1..3]
+<em>[1,4,9]</em> : List number
+</code>
+</div>
+</div>
+
+<a name="slide_21"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Rewarding</h1>
+<code>&gt; do_twice fn = \x -&gt; fn ( fn x )
+<em>&lt;function&gt;</em> : (a -&gt; a) -&gt; a -&gt; a
+
+&gt; do_twice double 4
+<em>16</em> : number
+</code>
+</div>
+</div>
+
+<a name="slide_22"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Rewarding</h1>
+<code>&gt; double_twice = do_twice double
+<em>&lt;function&gt;</em> : number -&gt; number
+
+&gt; double_twice 4
+<em>16</em> : number
+</code>
+</div>
+</div>
+
+<a name="slide_23"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Rewarding</h1>
+<ul>
+    <li>Clarity</li>
+    <li>Control</li>
+    <li>Confidence</li>
+    <li>Power</li>
+    <li>Happiness!</li>
+</ul>
+</div>
+</div>
+
+<!--a name="slide_24"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Discussion</h1>
+</div>
+</div-->
+
+<a name="slide_24"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>More info</h1>
+<table class="moreinfo">
+    <tr>
+        <th>Donate!</th>
+        <td><a href="https://www.patreon.com/andybalaam">patreon.com/andybalaam</a></td>
+    </tr>
+    <tr>
+        <th>Play!</th>
+        <td><a href="http://artificialworlds.net/rabbit-escape/">Rabbit Escape</a></td>
+    </tr>
+    <tr>
+        <th>Videos</th>
+        <td><a href="http://www.youtube.com/user/ajbalaam">youtube.com/user/ajbalaam</a></td>
+    </tr>
+    <tr>
+        <th>Twitter</th>
+        <td><a href="http://twitter.com/andybalaam">@andybalaam</a></td>
+    </tr>
+    <tr>
+        <th>Blog</th>
+        <td><a href="http://www.artificialworlds.net/blog">artificialworlds.net/blog</a></td>
+    </tr>
+    <tr>
+        <th>Projects </th>
+        <td><a href="http://www.artificialworlds.net">artificialworlds.net</a></td>
+    </tr>
+</table>
+</div>
+</div>
+
+</body>
+
+</html>
+
+
