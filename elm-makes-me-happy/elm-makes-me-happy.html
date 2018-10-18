@@ -34,16 +34,19 @@
 <div class="slide">
 <div class="slide_body">
 <h1>Immediate</h1>
-<div class="canvas"><div id="mousepos" style="width: 100%; height: 2em;"></div></div>
-<script src="mousepos.js"></script>
+<div class="canvas"><div id="bigsmall" style="width: 100%; height: 2em;"></div></div>
+<script src="bigsmall.js"></script>
 <script type="text/javascript">
-var mousepos = document.getElementById( "mousepos" );
-Elm.embed( Elm.MousePos, mousepos );
+var bigsmall = document.getElementById( "bigsmall" );
+Elm.BigSmall.init({node: bigsmall});
 </script>
-<code>import Mouse
-import Graphics.Element exposing ( show )
-
-main = Signal.map show Mouse.position</code>
+<code>main =
+  Browser.sandbox
+    { init = "foo"
+    , update = \_ m -&gt; String.reverse m
+    , view = \m -&gt; button [ onClick 0 ] [ text m ]
+    }
+</code>
 </div>
 </div>
 
@@ -77,7 +80,7 @@ main = Signal.map show Mouse.position</code>
 <div class="slide">
 <div class="slide_body">
 <h1>Immediate</h1>
-<code>&gt; double x = x * 2
+<code>&gt; double y = y * 2
 <em>&lt;function&gt;</em> : number -&gt; number
 
 &gt; double 4
@@ -104,11 +107,11 @@ main = Signal.map show Mouse.position</code>
 <div class="slide_body">
 <h1>Immediate</h1>
 <div class="canvas"><div id="eyes" style="display: inline-block;"></div></div>
-<script src="eyes.js"></script>
+<!--script src="eyes.js"></script>
 <script type="text/javascript">
 var eyes = document.getElementById( "eyes" );
 Elm.embed( Elm.Eyes, eyes );
-</script>
+</script-->
 <code>main = Signal.map scene Mouse.position
 
 scene ( x, y ) = collage 400 100
@@ -144,11 +147,11 @@ main = Signal.map show Mouse.position</span>" &gt; Main.elm
 <div class="slide_body">
 <h1>Clean</h1>
 <div class="canvas"><div id="validation"></div></div>
-<script src="validation.js"></script>
+<!--script src="validation.js"></script>
 <script type="text/javascript">
 var validation = document.getElementById( "validation" );
 Elm.embed( Elm.Validation, validation );
-</script>
+</script-->
 </div>
 </div>
 
