@@ -1,11 +1,11 @@
 
 TARGET := ../../eyes.js
-SOURCE := src/Eyes.elm
+SOURCE := Eyes.elm
 
 all: ${TARGET}
 
 ${TARGET}: ${SOURCE}
-	elm make --output $@ ${SOURCE}
+	elm-make --output $@ ${SOURCE}
 
 clean:
 	rm -f ${TARGET}

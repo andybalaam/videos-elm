@@ -107,11 +107,11 @@ Elm.BigSmall.init({node: bigsmall});
 <div class="slide_body">
 <h1>Immediate</h1>
 <div class="canvas"><div id="eyes" style="display: inline-block;"></div></div>
-<!--script src="eyes.js"></script>
+<script src="eyes.js"></script>
 <script type="text/javascript">
 var eyes = document.getElementById( "eyes" );
-Elm.embed( Elm.Eyes, eyes );
-</script-->
+Elm.Eyes.init({node: eyes});
+</script>
 <code>main = Signal.map scene Mouse.position
 
 scene ( x, y ) = collage 400 100
