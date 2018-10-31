@@ -81,6 +81,12 @@ code em
     font-style: normal;
 }
 
+code i
+{
+    color: green;
+    font-style: normal;
+}
+
 code.cmdline
 {
     color: #00ff00;
@@ -202,3 +208,6 @@ table.moreinfo td a
     text-decoration: none;
 }
 
+svg {
+    margin-top: 0.3em;
+}

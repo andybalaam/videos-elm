@@ -110,17 +110,19 @@ Elm.BigSmall.init({node: bigsmall});
 <script src="eyes.js"></script>
 <script type="text/javascript">
 var eyes = document.getElementById( "eyes" );
-Elm.Eyes.init({node: eyes});
+Elm.Eyes.init(
+    {
+        node: eyes,
+        flags: [window.innerWidth / 2.0, window.innerHeight / 2.0]
+    }
+);
 </script>
-<code>main = Signal.map scene Mouse.position
-
-scene ( x, y ) = collage 400 100
-    [ outlined defaultLine ( circle 20 )
-    , move
-        ( eyePos 0.05 x -200, -1 * eyePos 0.15 y -50 )
-        ( filled black ( circle 10 ) ) ]
-
-eyePos scale x off = scale * ( off + toFloat x )
+<code>type alias <em>Model</em> =
+    { x : Float
+    , y : Float
+    , centreX : Float
+    , centreY : Float
+    }
 </code>
 
 </div>
@@ -130,19 +132,62 @@ eyePos scale x off = scale * ( off + toFloat x )
 <div class="slide">
 <div class="slide_body">
 <h1>Immediate</h1>
-<code class="cmdline"><span class="prompt">$</span> sudo apt-get install nodejs-legacy
-<span class="prompt">$</span> sudo npm install -g elm
-<span class="prompt">$</span> echo "<span style="color: #66cccc">import Mouse
-import Graphics.Element exposing ( show )
-main = Signal.map show Mouse.position</span>" &gt; Main.elm 
-<span class="prompt">$</span> elm-reactor &amp;
-<span class="prompt">$</span> firefox localhost:8000/Main.elm &amp;
-</code>
-<div class="image"><img src="firefox-mousepos.png"/></div>
+<code><em>view</em> m =
+<i>...</i>
+    svg
+        [ width "100"
+        , height "40"
+        ]
+        [ ellipse
+            [ cx "10", cy "34", rx "12", ry "16"
+            , fill "white", stroke "black", strokeWidth "2px"
+            ] []
+<i>...</i></code>
+
 </div>
 </div>
 
 <a name="slide_8"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<code><em>update</em> (MouseChange x y) model =
+    (
+        { model
+        | x = x
+        , y = y
+        }
+    , Cmd.none
+    )</code>
+</div>
+</div>
+
+<a name="slide_9"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Immediate</h1>
+<div class="image" style="float: right; max-width: 33%"><img src="firefox-hello.png"/></div>
+<code class="cmdline"><span class="prompt">$</span> sudo apt-get install nodejs npm
+<span class="prompt">$</span> sudo npm install -g elm
+<span class="prompt">$</span> mkdir hello; cd hello
+<span class="prompt">$</span> echo | elm init
+<span class="prompt">$</span> echo '<span style="color: #66cccc">
+import Browser
+import Html
+main =
+    Browser.sandbox
+        { init = 0
+        , update = \_ _ -&gt; 0
+        , view = \_ -&gt; Html.text "Hello"
+        }
+</span>' &gt; Main.elm 
+<span class="prompt">$</span> elm reactor &amp;
+<span class="prompt">$</span> firefox localhost:8000/Main.elm &amp;
+</code>
+</div>
+</div>
+
+<a name="slide_10"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -155,7 +200,7 @@ Elm.embed( Elm.Validation, validation );
 </div>
 </div>
 
-<a name="slide_9"></a>
+<a name="slide_11"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -163,7 +208,7 @@ Elm.embed( Elm.Validation, validation );
 </div>
 </div>
 
-<a name="slide_10"></a>
+<a name="slide_12"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -180,7 +225,7 @@ model =
 </div>
 </div>
 
-<a name="slide_11"></a>
+<a name="slide_13"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -197,7 +242,7 @@ model =
 </div>
 </div>
 
-<a name="slide_12"></a>
+<a name="slide_14"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -212,7 +257,7 @@ validEmail string =
 </div>
 </div>
 
-<a name="slide_13"></a>
+<a name="slide_15"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -231,7 +276,7 @@ validEmail string =
 </div>
 </div>
 
-<a name="slide_14"></a>
+<a name="slide_16"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
@@ -244,7 +289,7 @@ validEmail string =
 </div>
 </div>
 
-<a name="slide_15"></a>
+<a name="slide_17"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
@@ -261,7 +306,7 @@ Detected errors in 1 module.
 </div>
 </div>
 
-<a name="slide_16"></a>
+<a name="slide_18"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
@@ -281,7 +326,7 @@ Detected errors in 1 module.
 </div>
 </div>
 
-<a name="slide_17"></a>
+<a name="slide_19"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
@@ -302,7 +347,7 @@ But it is:
 </div>
 </div>
 
-<a name="slide_18"></a>
+<a name="slide_20"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
@@ -310,7 +355,7 @@ But it is:
 </div>
 </div>
 
-<a name="slide_19"></a>
+<a name="slide_21"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Rewarding</h1>
@@ -319,7 +364,7 @@ But it is:
 </div>
 </div>
 
-<a name="slide_20"></a>
+<a name="slide_22"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Rewarding</h1>
@@ -332,7 +377,7 @@ But it is:
 </div>
 </div>
 
-<a name="slide_21"></a>
+<a name="slide_23"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Rewarding</h1>
@@ -345,7 +390,7 @@ But it is:
 </div>
 </div>
 
-<a name="slide_22"></a>
+<a name="slide_24"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Rewarding</h1>
@@ -358,7 +403,7 @@ But it is:
 </div>
 </div>
 
-<a name="slide_23"></a>
+<a name="slide_25"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>Rewarding</h1>
@@ -379,7 +424,7 @@ But it is:
 </div>
 </div-->
 
-<a name="slide_24"></a>
+<a name="slide_26"></a>
 <div class="slide">
 <div class="slide_body">
 <h1>More info</h1>
