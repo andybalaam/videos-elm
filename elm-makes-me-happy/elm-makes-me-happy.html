@@ -172,17 +172,11 @@ Elm.Eyes.init(
 <span class="prompt">$</span> mkdir hello; cd hello
 <span class="prompt">$</span> echo | elm init
 <span class="prompt">$</span> echo '<span style="color: #66cccc">
-import Browser
 import Html
-main =
-    Browser.sandbox
-        { init = 0
-        , update = \_ _ -&gt; 0
-        , view = \_ -&gt; Html.text "Hello"
-        }
-</span>' &gt; Main.elm 
+main = Html.text "Hello"
+</span>' &gt; src/Main.elm
 <span class="prompt">$</span> elm reactor &amp;
-<span class="prompt">$</span> firefox localhost:8000/Main.elm &amp;
+<span class="prompt">$</span> firefox localhost:8000/src/Main.elm &amp;
 </code>
 </div>
 </div>
