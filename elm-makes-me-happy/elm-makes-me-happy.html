@@ -186,11 +186,11 @@ main = Html.text "Hello"
 <div class="slide_body">
 <h1>Clean</h1>
 <div class="canvas"><div id="validation"></div></div>
-<!--script src="validation.js"></script>
+<script src="validation.js"></script>
 <script type="text/javascript">
 var validation = document.getElementById( "validation" );
-Elm.embed( Elm.Validation, validation );
-</script-->
+Elm.Validation.init({node: validation});
+</script>
 </div>
 </div>
 
