@@ -4296,14 +4296,14 @@ function _Browser_load(url)
 }
 var author$project$Validation$init = {email1: '', email2: ''};
 var author$project$Validation$update = F2(
-	function (action, model) {
-		if (action.$ === 'Email1Changed') {
-			var s = action.a;
+	function (msg, model) {
+		if (msg.$ === 'Email1Changed') {
+			var s = msg.a;
 			return _Utils_update(
 				model,
 				{email1: s});
 		} else {
-			var s = action.a;
+			var s = msg.a;
 			return _Utils_update(
 				model,
 				{email2: s});

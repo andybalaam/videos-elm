@@ -280,15 +280,14 @@ Elm.Validation.init({node: validation});
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
-<code>-- TYPE MISMATCH ----------------- Frustration.elm
+<code>-- TOO MANY ARGS -------------------------------------- src/FrustrationTypes.elm
 
-Function `myfn` is expecting 1 argument, but was given 2.
+The `myfn` function expects 1 argument, but it got 2 instead.
 
-2│     myfn 3 4
-              ^
-Maybe you forgot some parentheses? Or a comma?
-
-Detected errors in 1 module.  
+10|     myfn 3 4
+        ^^^^
+Are there any missing commas? Or missing parentheses?
+Makefile:8: recipe for target 'type' failed
 </code>
 </div>
 </div>
@@ -297,18 +296,18 @@ Detected errors in 1 module.
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
-<code>-- BAD MAIN TYPE ----------------- Frustration.elm
+<code>-- BAD MAIN TYPE ------------------------------------------- src/Frustration.elm
 
-The 'main' value has an unsupported type.
+I cannot handle this type of `main` value:
 
-2│ main = 1 + 1
-   ^^^^^^^^^^^^
-I need an Element, Html, (Signal Element), or (Signal Html)
-so I can render it on screen, but you gave me:
+2| main = 1 + 1
+   ^^^^
+The type of `main` value I am seeing is:
 
-   number
+    number
 
-Detected errors in 1 module.      
+I only know how to handle Html, Svg, and Programs though. Modify `main` to be
+one of those types of values!
 </code>
 </div>
 </div>
@@ -317,20 +316,28 @@ Detected errors in 1 module.
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
-<code>-- TYPE MISMATCH ------------------ Validation.elm
+<code style="font-size: 40%">-- TYPE MISMATCH -------------------------------------------- src/Validation.elm
 
-The 1st argument to function `message` is causing
-a mismatch.
+The 1st argument to `sandbox` is not what I expect:
 
-39│  Signal.message 3 address (action str)
-                    ^
-Function `message` is expecting the 1st argument to be:
+10|     Browser.sandbox
+11|&gt;        { init = init
+12|&gt;        , update = update
+13|&gt;        , view = view
+14|&gt;        }
 
-    Signal.Address a
+This argument is a record of type:
 
-But it is:
+    { init : Model, update : String -&gt; Model -&gt; Model, view : Model -&gt; Html Msg
+    }
 
-    number</code>
+But `sandbox` needs the 1st argument to be:
+
+    { init : Model
+    , update : String -&gt; Model -&gt; Model
+    , view : Model -&gt; Html String
+    }
+</code>
 </div>
 </div>
 
@@ -338,7 +345,7 @@ But it is:
 <div class="slide">
 <div class="slide_body">
 <h1>Frustrating</h1>
-<code>Success! Compiled 1 modules.</code>
+<code>Success! Compiled 1 module.</code>
 </div>
 </div>
 
@@ -346,7 +353,7 @@ But it is:
 <div class="slide">
 <div class="slide_body">
 <h1>Rewarding</h1>
-<code>Success! Compiled 1 modules.</code>
+<code>Success! Compiled 1 module.</code>
 <div class="image"><img style="height: 10em;" src="i-carry-guns.jpg"/></div>
 </div>
 </div>
