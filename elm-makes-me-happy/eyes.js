@@ -5533,19 +5533,19 @@ var elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
 var author$project$Eyes$view = function (m) {
 	var s = elm$core$String$fromFloat;
 	var rightY = 0.0;
-	var rightYe = rightY + (12.0 * (((m.y - m.centreY) + rightY) / m.centreY));
-	var rightX = 14.0;
-	var rightXe = ((-1) + rightX) + (3.0 * (((m.x - m.centreX) + rightX) / m.centreX));
-	var leftY = 1.0;
-	var leftYe = leftY + (8.0 * (((m.y - m.centreY) + leftY) / m.centreY));
-	var leftX = -14.0;
-	var leftXe = (1 + leftX) + (4.0 * (((m.x - m.centreX) + leftX) / m.centreX));
+	var rightYe = rightY + (24.0 * (((m.y - m.centreY) + rightY) / m.centreY));
+	var rightX = 28.0;
+	var rightXe = ((-1) + rightX) + (6.0 * (((m.x - m.centreX) + rightX) / m.centreX));
+	var leftY = 2.0;
+	var leftYe = leftY + (16.0 * (((m.y - m.centreY) + leftY) / m.centreY));
+	var leftX = -28.0;
+	var leftXe = (2 + leftX) + (8.0 * (((m.x - m.centreX) + leftX) / m.centreX));
 	return A2(
 		elm$svg$Svg$svg,
 		_List_fromArray(
 			[
-				elm$svg$Svg$Attributes$width('100'),
-				elm$svg$Svg$Attributes$height('40')
+				elm$svg$Svg$Attributes$width('200'),
+				elm$svg$Svg$Attributes$height('80')
 			]),
 		_List_fromArray(
 			[
@@ -5554,11 +5554,11 @@ var author$project$Eyes$view = function (m) {
 				_List_fromArray(
 					[
 						elm$svg$Svg$Attributes$cx(
-						s(50 + leftX)),
+						s(100 + leftX)),
 						elm$svg$Svg$Attributes$cy(
-						s(20 + leftY)),
-						elm$svg$Svg$Attributes$rx('12'),
-						elm$svg$Svg$Attributes$ry('16'),
+						s(40 + leftY)),
+						elm$svg$Svg$Attributes$rx('24'),
+						elm$svg$Svg$Attributes$ry('32'),
 						elm$svg$Svg$Attributes$fill('white'),
 						elm$svg$Svg$Attributes$stroke('black'),
 						elm$svg$Svg$Attributes$strokeWidth('2px')
@@ -5569,11 +5569,11 @@ var author$project$Eyes$view = function (m) {
 				_List_fromArray(
 					[
 						elm$svg$Svg$Attributes$cx(
-						s(50 + rightX)),
+						s(100 + rightX)),
 						elm$svg$Svg$Attributes$cy(
-						s(20 + rightY)),
-						elm$svg$Svg$Attributes$rx('12'),
-						elm$svg$Svg$Attributes$ry('18'),
+						s(40 + rightY)),
+						elm$svg$Svg$Attributes$rx('24'),
+						elm$svg$Svg$Attributes$ry('36'),
 						elm$svg$Svg$Attributes$fill('white'),
 						elm$svg$Svg$Attributes$stroke('black'),
 						elm$svg$Svg$Attributes$strokeWidth('2px')
@@ -5584,11 +5584,11 @@ var author$project$Eyes$view = function (m) {
 				_List_fromArray(
 					[
 						elm$svg$Svg$Attributes$cx(
-						s(50 + leftXe)),
+						s(100 + leftXe)),
 						elm$svg$Svg$Attributes$cy(
-						s(20 + leftYe)),
-						elm$svg$Svg$Attributes$rx('7'),
-						elm$svg$Svg$Attributes$ry('7'),
+						s(40 + leftYe)),
+						elm$svg$Svg$Attributes$rx('14'),
+						elm$svg$Svg$Attributes$ry('14'),
 						elm$svg$Svg$Attributes$fill('black')
 					]),
 				_List_Nil),
@@ -5597,11 +5597,11 @@ var author$project$Eyes$view = function (m) {
 				_List_fromArray(
 					[
 						elm$svg$Svg$Attributes$cx(
-						s(50 + rightXe)),
+						s(100 + rightXe)),
 						elm$svg$Svg$Attributes$cy(
-						s(20 + rightYe)),
-						elm$svg$Svg$Attributes$rx('7'),
-						elm$svg$Svg$Attributes$ry('7'),
+						s(40 + rightYe)),
+						elm$svg$Svg$Attributes$rx('14'),
+						elm$svg$Svg$Attributes$ry('14'),
 						elm$svg$Svg$Attributes$fill('black')
 					]),
 				_List_Nil)
