@@ -172,40 +172,24 @@ input
     vertical-align: middle;
 }
 
-table.moreinfo
+#moreinfo
 {
-    border: 0em;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    padding: 1%;
+    text-align: center;
+
 }
 
-table.moreinfo th
+#moreinfo a
 {
-    font-weight: normal;
-    text-align: right;
-    width: 30%;
-    padding: 1%;
-    padding-right: 5%;
-    vertical-align: bottom;
-    font-size: 90%;
+    width: 20%;
+    display: inline-block;
+    font-size: 0.33em;
+    text-align: center;
+    margin-bottom: 3em;
 }
 
-table.moreinfo td
+#moreinfo a img
 {
-    font-weight: normal;
-    text-align: left;
-    vertical-align: bottom;
-    width: 90%;
-    padding: 1%;
-    font-size: 90%;
-}
-
-table.moreinfo td a
-{
-    text-decoration: none;
+    width: 100%;
 }
 
 svg {
