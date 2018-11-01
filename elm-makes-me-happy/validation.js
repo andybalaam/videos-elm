@@ -4309,6 +4309,12 @@ var author$project$Validation$update = F2(
 				{email2: s});
 		}
 	});
+var author$project$Validation$Email1Changed = function (a) {
+	return {$: 'Email1Changed', a: a};
+};
+var author$project$Validation$Email2Changed = function (a) {
+	return {$: 'Email2Changed', a: a};
+};
 var author$project$Validation$Valid = {$: 'Valid'};
 var author$project$Validation$Empty = {$: 'Empty'};
 var author$project$Validation$Invalid = {$: 'Invalid'};
@@ -4404,37 +4410,8 @@ var author$project$Validation$validEmail1 = function (model) {
 var author$project$Validation$validEmail2 = function (model) {
 	return (model.email1 === '') ? author$project$Validation$Empty : (_Utils_eq(model.email1, model.email2) ? author$project$Validation$Valid : author$project$Validation$Invalid);
 };
-var elm$core$Basics$and = _Basics_and;
-var author$project$Validation$submitEnabled = function (model) {
-	return _Utils_eq(
-		author$project$Validation$validEmail1(model),
-		author$project$Validation$Valid) && _Utils_eq(
-		author$project$Validation$validEmail2(model),
-		author$project$Validation$Valid);
-};
-var author$project$Validation$tickImage = function (isvalid) {
-	switch (isvalid.$) {
-		case 'Empty':
-			return 'blank.png';
-		case 'Valid':
-			return 'tick.png';
-		default:
-			return 'cross.png';
-	}
-};
-var elm$core$Basics$not = _Basics_not;
-var elm$core$Basics$identity = function (x) {
-	return x;
-};
-var elm$core$Basics$False = {$: 'False'};
-var elm$core$Basics$True = {$: 'True'};
-var elm$core$Result$isOk = function (result) {
-	if (result.$ === 'Ok') {
-		return true;
-	} else {
-		return false;
-	}
-};
+var elm$core$Basics$neq = _Utils_notEqual;
+var elm$core$Basics$or = _Basics_or;
 var elm$core$Array$branchFactor = 32;
 var elm$core$Array$Array_elm_builtin = F4(
 	function (a, b, c, d) {
@@ -4563,6 +4540,7 @@ var elm$core$Array$builderToArray = F2(
 				builder.tail);
 		}
 	});
+var elm$core$Basics$False = {$: 'False'};
 var elm$core$Basics$idiv = _Basics_idiv;
 var elm$core$Basics$lt = _Utils_lt;
 var elm$core$Elm$JsArray$initialize = _JsArray_initialize;
@@ -4611,6 +4589,14 @@ var elm$core$Result$Err = function (a) {
 var elm$core$Result$Ok = function (a) {
 	return {$: 'Ok', a: a};
 };
+var elm$core$Basics$True = {$: 'True'};
+var elm$core$Result$isOk = function (result) {
+	if (result.$ === 'Ok') {
+		return true;
+	} else {
+		return false;
+	}
+};
 var elm$json$Json$Decode$Failure = F2(
 	function (a, b) {
 		return {$: 'Failure', a: a, b: b};
@@ -4626,8 +4612,8 @@ var elm$json$Json$Decode$Index = F2(
 var elm$json$Json$Decode$OneOf = function (a) {
 	return {$: 'OneOf', a: a};
 };
+var elm$core$Basics$and = _Basics_and;
 var elm$core$Basics$append = _Utils_append;
-var elm$core$Basics$or = _Basics_or;
 var elm$core$Char$toCode = _Char_toCode;
 var elm$core$Char$isLower = function (_char) {
 	var code = elm$core$Char$toCode(_char);
@@ -4815,6 +4801,10 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 			}
 		}
 	});
+var elm$json$Json$Encode$bool = _Json_wrap;
+var elm$core$Basics$identity = function (x) {
+	return x;
+};
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
@@ -4830,13 +4820,6 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
-var elm$html$Html$button = _VirtualDom_node('button');
-var elm$html$Html$div = _VirtualDom_node('div');
-var elm$html$Html$img = _VirtualDom_node('img');
-var elm$html$Html$input = _VirtualDom_node('input');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var elm$json$Json$Encode$bool = _Json_wrap;
 var elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
 		return A2(
@@ -4845,6 +4828,30 @@ var elm$html$Html$Attributes$boolProperty = F2(
 			elm$json$Json$Encode$bool(bool));
 	});
 var elm$html$Html$Attributes$disabled = elm$html$Html$Attributes$boolProperty('disabled');
+var author$project$Validation$submitDisabled = function (model) {
+	return elm$html$Html$Attributes$disabled(
+		(!_Utils_eq(
+			author$project$Validation$validEmail1(model),
+			author$project$Validation$Valid)) || (!_Utils_eq(
+			author$project$Validation$validEmail2(model),
+			author$project$Validation$Valid)));
+};
+var author$project$Validation$tickImage = function (isvalid) {
+	switch (isvalid.$) {
+		case 'Empty':
+			return 'blank.png';
+		case 'Valid':
+			return 'tick.png';
+		default:
+			return 'cross.png';
+	}
+};
+var elm$html$Html$button = _VirtualDom_node('button');
+var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$img = _VirtualDom_node('img');
+var elm$html$Html$input = _VirtualDom_node('input');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -4862,101 +4869,20 @@ var elm$html$Html$Attributes$src = function (url) {
 var elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var elm$html$Html$Attributes$style = elm$virtual_dom$VirtualDom$style;
 var elm$html$Html$Attributes$value = elm$html$Html$Attributes$stringProperty('value');
-var author$project$Validation$view = function (model) {
-	var row = F3(
-		function (caption, val, valid) {
-			return A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						A2(elm$html$Html$Attributes$style, 'padding', '0.3em'),
-						A2(elm$html$Html$Attributes$style, 'display', 'block')
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text(caption),
-						A2(
-						elm$html$Html$input,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$value(val)
-							]),
-						_List_Nil),
-						A2(
-						elm$html$Html$img,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$src(
-								author$project$Validation$tickImage(valid)),
-								A2(elm$html$Html$Attributes$style, 'width', '0.8em'),
-								A2(elm$html$Html$Attributes$style, 'height', '0.8em'),
-								A2(elm$html$Html$Attributes$style, 'margin-top', '0.3em'),
-								A2(elm$html$Html$Attributes$style, 'margin-left', '0.2em')
-							]),
-						_List_Nil)
-					]));
-		});
-	return A2(
-		elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A3(
-				row,
-				'Enter email:',
-				model.email1,
-				author$project$Validation$validEmail1(model)),
-				A3(
-				row,
-				'Email again:',
-				model.email2,
-				author$project$Validation$validEmail2(model)),
-				A2(
-				elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$button,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$disabled(
-								!author$project$Validation$submitEnabled(model))
-							]),
-						_List_fromArray(
-							[
-								elm$html$Html$text('Submit')
-							]))
-					]))
-			]));
+var elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
 };
-var elm$core$Platform$Cmd$batch = _Platform_batch;
-var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
-var elm$core$Platform$Sub$batch = _Platform_batch;
-var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
-var elm$browser$Browser$External = function (a) {
-	return {$: 'External', a: a};
+var elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
 };
-var elm$browser$Browser$Internal = function (a) {
-	return {$: 'Internal', a: a};
-};
-var elm$browser$Browser$Dom$NotFound = function (a) {
-	return {$: 'NotFound', a: a};
-};
-var elm$core$Basics$never = function (_n0) {
-	never:
-	while (true) {
-		var nvr = _n0.a;
-		var $temp$_n0 = nvr;
-		_n0 = $temp$_n0;
-		continue never;
-	}
-};
-var elm$core$Task$Perform = function (a) {
-	return {$: 'Perform', a: a};
-};
-var elm$core$Task$succeed = _Scheduler_succeed;
-var elm$core$Task$init = elm$core$Task$succeed(_Utils_Tuple0);
+var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
 var elm$core$List$foldrHelper = F4(
 	function (fn, acc, ctr, ls) {
 		if (!ls.b) {
@@ -5012,6 +4938,123 @@ var elm$core$List$foldr = F3(
 	function (fn, acc, ls) {
 		return A4(elm$core$List$foldrHelper, fn, acc, 0, ls);
 	});
+var elm$json$Json$Decode$field = _Json_decodeField;
+var elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3(elm$core$List$foldr, elm$json$Json$Decode$field, decoder, fields);
+	});
+var elm$json$Json$Decode$string = _Json_decodeString;
+var elm$html$Html$Events$targetValue = A2(
+	elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	elm$json$Json$Decode$string);
+var elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			elm$json$Json$Decode$map,
+			elm$html$Html$Events$alwaysStop,
+			A2(elm$json$Json$Decode$map, tagger, elm$html$Html$Events$targetValue)));
+};
+var author$project$Validation$view = function (model) {
+	var row = F4(
+		function (caption, val, valid, msg) {
+			return A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2(elm$html$Html$Attributes$style, 'padding', '0.3em'),
+						A2(elm$html$Html$Attributes$style, 'display', 'block')
+					]),
+				_List_fromArray(
+					[
+						elm$html$Html$text(caption),
+						A2(
+						elm$html$Html$input,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$value(val),
+								elm$html$Html$Events$onInput(msg)
+							]),
+						_List_Nil),
+						A2(
+						elm$html$Html$img,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$src(
+								author$project$Validation$tickImage(valid)),
+								A2(elm$html$Html$Attributes$style, 'width', '0.8em'),
+								A2(elm$html$Html$Attributes$style, 'height', '0.8em'),
+								A2(elm$html$Html$Attributes$style, 'margin-top', '0.3em'),
+								A2(elm$html$Html$Attributes$style, 'margin-left', '0.2em')
+							]),
+						_List_Nil)
+					]));
+		});
+	return A2(
+		elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A4(
+				row,
+				'Enter email:',
+				model.email1,
+				author$project$Validation$validEmail1(model),
+				author$project$Validation$Email1Changed),
+				A4(
+				row,
+				'Email again:',
+				model.email2,
+				author$project$Validation$validEmail2(model),
+				author$project$Validation$Email2Changed),
+				A2(
+				elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$button,
+						_List_fromArray(
+							[
+								author$project$Validation$submitDisabled(model)
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text('Submit')
+							]))
+					]))
+			]));
+};
+var elm$core$Platform$Cmd$batch = _Platform_batch;
+var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
+var elm$core$Platform$Sub$batch = _Platform_batch;
+var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
+var elm$browser$Browser$External = function (a) {
+	return {$: 'External', a: a};
+};
+var elm$browser$Browser$Internal = function (a) {
+	return {$: 'Internal', a: a};
+};
+var elm$browser$Browser$Dom$NotFound = function (a) {
+	return {$: 'NotFound', a: a};
+};
+var elm$core$Basics$never = function (_n0) {
+	never:
+	while (true) {
+		var nvr = _n0.a;
+		var $temp$_n0 = nvr;
+		_n0 = $temp$_n0;
+		continue never;
+	}
+};
+var elm$core$Task$Perform = function (a) {
+	return {$: 'Perform', a: a};
+};
+var elm$core$Task$succeed = _Scheduler_succeed;
+var elm$core$Task$init = elm$core$Task$succeed(_Utils_Tuple0);
 var elm$core$List$map = F2(
 	function (f, xs) {
 		return A3(

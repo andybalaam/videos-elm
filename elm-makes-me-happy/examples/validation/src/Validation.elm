@@ -1,9 +1,9 @@
 module Validation exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, img, input, text)
+import Html exposing (Attribute, Html, button, div, img, input, text)
 import Html.Attributes exposing (disabled, src, style, value)
-import Html.Events exposing (on)
+import Html.Events exposing (onInput)
 
 
 main =
@@ -41,8 +41,8 @@ init =
 view : Model -> Html Msg
 view model =
     let
-        row : String -> String -> IsValid -> Html Msg
-        row caption val valid =
+        row : String -> String -> IsValid -> (String -> Msg) -> Html Msg
+        row caption val valid msg =
             div
                 [ style "padding" "0.3em"
                 , style "display" "block"
@@ -50,10 +50,7 @@ view model =
                 [ text caption
                 , input
                     [ value val
-                    --, on
-                    --    "input"
-                    --    targetValue
-                    --    (\str -> Signal.message address (action str))
+                    , onInput msg
                     ]
                     []
                 , img
@@ -66,53 +63,74 @@ view model =
                     []
                 ]
     in
-        div
+    div
+        []
+        [ row
+            "Enter email:"
+            model.email1
+            (validEmail1 model)
+            Email1Changed
+        , row
+            "Email again:"
+            model.email2
+            (validEmail2 model)
+            Email2Changed
+        , div
             []
-            [ row
-                "Enter email:"
-                model.email1
-                (validEmail1 model)
-            , row
-                "Email again:"
-                model.email2
-                (validEmail2 model)
-            , div
-                []
-                [ button
-                    [ disabled (not (submitEnabled model)) ]
-                    [ text "Submit" ]
-                ]
+            [ button
+                [ submitDisabled model ]
+                [ text "Submit" ]
             ]
+        ]
 
 
 validEmail1 : Model -> IsValid
 validEmail1 model =
-    if model.email1 == "" then Empty
-    else if String.contains "@" model.email1 then Valid
-    else Invalid
+    if model.email1 == "" then
+        Empty
+
+    else if String.contains "@" model.email1 then
+        Valid
+
+    else
+        Invalid
 
 
 validEmail2 : Model -> IsValid
 validEmail2 model =
-    if model.email1 == "" then Empty
-    else if model.email1 == model.email2 then Valid
-    else Invalid
+    if model.email1 == "" then
+        Empty
+
+    else if model.email1 == model.email2 then
+        Valid
+
+    else
+        Invalid
 
 
-submitEnabled model =
-    validEmail1 model == Valid && validEmail2 model == Valid
+submitDisabled : Model -> Attribute Msg
+submitDisabled model =
+    disabled ((validEmail1 model /= Valid) || (validEmail2 model /= Valid))
 
 
 tickImage : IsValid -> String
 tickImage isvalid =
     case isvalid of
-        Empty -> "blank.png"
-        Valid -> "tick.png"
-        Invalid -> "cross.png"
+        Empty ->
+            "blank.png"
+
+        Valid ->
+            "tick.png"
+
+        Invalid ->
+            "cross.png"
 
 
 update : Msg -> Model -> Model
-update action model =
-    case action of
-        Email1Changed s -> { model | email1 = s }
-        Email2Changed s -> { model | email2 = s }
+update msg model =
+    case msg of
+        Email1Changed s ->
+            { model | email1 = s }
+
+        Email2Changed s ->
+            { model | email2 = s }

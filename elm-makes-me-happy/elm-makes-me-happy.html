@@ -210,11 +210,6 @@ Elm.Validation.init({node: validation});
     { email1 : String
     , email2 : String
     }
-
-model =
-    { email1 = ""
-    , email2 = ""
-    }
 </code>
 </div>
 </div>
@@ -223,15 +218,15 @@ model =
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
-<code><em>view</em> address model =
-...
+<code><em>view</em> model =
+<i>...</i>
     div
         []
         [ button
             [ submitDisabled model ]
             [ text "Submit" ]
         ]
-...
+<i>...</i>
 </code>
 </div>
 </div>
@@ -241,12 +236,10 @@ model =
 <div class="slide_body">
 <h1>Clean</h1>
 <code>submitDisabled model =
-    disabled (
-        validEmail model.email1 &amp;&amp;
-        model.email1 == model.email2 )
-
-validEmail string =
-    contains "@" string
+    disabled
+        (  (validEmail1 model /= Valid)
+        || (validEmail2 model /= Valid)
+        )
 </code>
 </div>
 </div>
@@ -255,12 +248,12 @@ validEmail string =
 <div class="slide">
 <div class="slide_body">
 <h1>Clean</h1>
-<code>type Action =
-    Email1Changed String |
-    Email2Changed String
+<code>type Msg
+    = Email1Changed String
+    | Email2Changed String
 
-<em>update</em> action model =
-    case action of
+<em>update</em> msg model =
+    case msg of
         Email1Changed s -&gt;
             { model | email1 = s }
 
