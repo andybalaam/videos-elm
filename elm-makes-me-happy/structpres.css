@@ -153,6 +153,26 @@ div.slide.title address a
     font-size: 60%;
 }
 
+div.cc
+{
+    top: 5%;
+    right: 5%;
+    position: absolute;
+    font-size: 25%;
+    text-align: right;
+}
+
+div.cc img
+{
+    float: right;
+    max-width: 88px;
+    max-height: 31px;
+    border-width: 0px;
+    width: 25%;
+    margin-left: 0.75em;
+    margin-top: 0.25em;
+}
+
 div.slide.contents a
 {
     color: inherit;
