@@ -1,0 +1,92 @@
+
+## primitives
+
+- Numbers  42, 3.14
+- Strings "abc", """sdfsdf"""
+- Chars 'a'
+- Booleans True, False
+
+- Lists ["a","d","x"], [1..4], []
+
+- Tuples (1,2,3), ("a", 2, 'x')
+
+- Types: Int, List String
+-- Record types { x: Int, yz: String, ss: List String }
+-- Partial record type specs { thing | size : Int } (like an interface)
+-- Type names start with capitals
+-- Generic params start with smalls
+
+- Records: { x=3, yz="foo", ss=["a","b"] }
+
+
+## means of combination
+
+- Logical &&, not, ||
+- Arithmetic + , *, -, ^
+- Concatenation ++ (strings and lists)
+- Conditionals >, <, >=, <=
+- Cons 1 :: [2,3,4], 1 :: 2 :: []
+
+- if ... then ... else if ... then ... else
+
+- case ... of ... -> ... ->
+
+    case maybe of
+	  Just xs -> xs
+	  Nothing -> []
+
+	case xs of
+	  hd::tl -> Just (hd,tl)
+	  []     -> Nothing
+
+	case n of
+	  0 -> 1
+	  1 -> 1
+	  _ -> fib (n-1) + fib (n-2)
+
+     (INDENTATION SENSITIVE)
+
+- Union types:
+    type Status = Available | Busy | Away
+    type Status = Available | Busy String | Away Int
+
+- Record update:
+    { mything | x=4 }
+
+
+## means of abstraction
+
+- Functions:
+    square n = n^2
+    apply_twice f n = f (f n)
+    apply_twice square 3
+
+- Specifying types:
+    square : Int -> Int
+    sum_of_squares : Int -> Int -> Int
+    apply_twice: ( Int -> Int ) -> Int -> Int
+    apply_twice: ( a -> a ) -> a -> a
+
+- Type aliases:
+    type alias Point = { x : Int, y : Int }
+    type alias Metres = Int
+
+- Currying:
+    square_twice = apply_twice square
+    square_twice 3
+
+## fluff
+
+- Comments -- {- -} (nestable)
+
+## Syntax still to come
+  - custom operators
+  - <| & |> (reducing parentheses)
+  - << and >> (function composition)
+  - let .. in expressions
+  - infix e.g. `fn` and (+)
+  - Modules
+  - Talking to JavaScript
+
+
+

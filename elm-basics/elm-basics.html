@@ -1,0 +1,634 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="structpres.css"/>
+    <script src="structpres.js"></script>
+    <title>Elm basics</title>
+</head>
+
+<body id="body">
+
+<div class="slide title">
+<h1>Elm basics</h1>
+
+<address>Andy Balaam<br/>
+<a href="http://www.artificialworlds.net/blog">artificialworlds.net/blog</a></address>
+</div>
+
+<a name="contents"></a>
+<div class="slide contents">
+<div class="slide_body">
+<h1>Contents</h1>
+<ul>
+    <li><a class="go_to_slide" href="#slide_1">Values</a></li>
+    <li><a class="go_to_slide" href="#slide_7">Combining values</a></li>
+    <li><a class="go_to_slide" href="#slide_17">Functions</a></li>
+    <li><a class="go_to_slide" href="#slide_21">Combining functions</a></li>
+    <li><a class="go_to_slide" href="#slide_24">Types</a></li>
+    <li><a class="go_to_slide" href="#slide_35">Combining Types</a></li>
+</ul>
+</div>
+</div>
+
+<a name="slide_1"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Values - numbers</h1>
+<code>&gt; 45
+<em>45</em> : number
+
+&gt; 45.3
+<em>45.3</em> : Float
+
+&gt; round 45
+<em>45</em> : Int
+</code>
+</div>
+</div>
+
+<a name="slide_2"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Values - strings</h1>
+<code>&gt; "foo"
+<em>"foo"</em> : String
+
+&gt; 'x'
+<em>'x'</em> : Char
+</code>
+</div>
+</div>
+
+<a name="slide_3"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Values - booleans</h1>
+<code>&gt; True
+<em>True</em> : Bool
+
+&gt; False
+<em>False</em> : Bool
+</code>
+</div>
+</div>
+
+<a name="slide_4"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Values - lists</h1>
+<code>&gt; ["a","d","x"]
+<em>["a","d","x"]</em> : List String
+
+&gt; [1..4]
+<em>[1,2,3,4]</em> : List number
+
+&gt; []
+<em>[]</em> : List a
+</code>
+</div>
+</div>
+
+<a name="slide_5"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Values - tuples</h1>
+<code>&gt; (1,2,3)
+<em>(1,2,3)</em> : ( number, number', number'' )
+
+&gt; ("a",2,'x')
+<em>("a",2,'x')</em> : ( String, number, Char )
+</code>
+</div>
+</div>
+
+<a name="slide_6"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Values - records</h1>
+<code>&gt; { name="Andy", score=10, comments=["foo","bar"] }
+<em>{ name = "Andy", score = 10, comments = ["foo","bar"] }</em>
+    : { comments : List String
+      , name : String
+      , score : number }
+</code>
+</div>
+</div>
+
+<a name="slide_7"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - arithmetic</h1>
+<code>&gt; 3 <em>+</em> 4
+7 : number
+
+&gt; 3 <em>*</em> 4
+12 : number
+
+&gt; ( ( 3 <em>-</em> 4 ) <em>/</em> 2 ) <em>^</em> 5
+-0.03125 : Float
+</code>
+</div>
+</div>
+
+<a name="slide_8"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - strings</h1>
+<code>&gt; "Dev" <em>++</em> "Ops"
+"DevOps" : String
+</code>
+</div>
+</div>
+
+<a name="slide_9"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - logic</h1>
+<code>&gt; 4 <em>&lt;</em> 5 <em>&amp;&amp;</em> 5 <em>&lt;</em> 6
+True : Bool
+
+&gt; <em>not</em> <em>False</em>
+True : Bool
+
+&gt; 80 <em>==</em> 8 <em>||</em> 6 <em>&gt;=</em> 6
+True : Bool
+
+&gt; 5 <em>/=</em> 6
+True : bool
+</code>
+</div>
+</div>
+
+<a name="slide_10"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - lists</h1>
+<p>Join 2 lists:</p>
+<code>&gt; [1,2] <em>++</em> [4,3]
+[1,2,4,3] : List number</code>
+</div>
+</div>
+
+<a name="slide_11"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - lists</h1>
+<p>Add to the front of a list:</p>
+<code>&gt; 1 <em>::</em> []
+[1] : List number
+
+&gt; 1 <em>::</em> [5,4,3]
+[1,5,4,3] : List number
+</code>
+</div>
+</div>
+
+<a name="slide_12"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - if</h1>
+<code><em>if</em> legs == 3 <em>then</em>
+    "tripod"
+<em>else if</em> eyes == 1 <em>then</em>
+    "cyclops"
+<em>else</em>
+    "human"
+</code>
+</div>
+</div>
+
+<a name="slide_13"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - case</h1>
+<code><em>case</em> legs <em>of</em>
+    3 <em>-&gt;</em> "tripod"
+    4 <em>-&gt;</em> "lion"
+    _ <em>-&gt;</em> "human"
+</code>
+<p>Note: <tt>case</tt> is indentation sensitive</p>
+</div>
+</div>
+
+<a name="slide_14"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - case</h1>
+<code><em>case</em> List.head mylist <em>of</em>
+    Just x <em>-&gt;</em> x
+    Nothing <em>-&gt;</em> "The list was empty!"
+</code>
+</div>
+</div>
+
+<a name="slide_15"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining values - records</h1>
+<code>&gt; person = { name="Andy", age=21 }
+{ name = "Andy", age = 21 } : { age : number, name : String }
+
+&gt; <em>{</em> person <em>|</em> age=22 <em>}</em>
+{ name = "Andy", age = 22 } : { name : String, age : number }
+</code>
+</div>
+</div>
+
+<a name="slide_16"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Naming values</h1>
+<code>&gt; x <em>=</em> 3
+3 : number
+
+&gt; x + 2
+5 : number
+</code>
+</div>
+</div>
+
+<a name="slide_17"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Functions</h1>
+<code><em>square</em> n <em>=</em>
+    n ^ 2
+
+<em>gravity</em> v t <em>=</em>
+    v - 9.81 * t
+</code>
+</div>
+</div>
+
+<a name="slide_18"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Functions</h1>
+<code>&gt; square 3
+9 : number
+
+&gt; gravity 10 0.1
+9.019 : Float
+
+&gt; square <em>(</em>gravity 10 0.1<em>)</em>
+81.342361 : Float
+</code>
+</div>
+</div>
+
+<a name="slide_19"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Functions</h1>
+<code>&gt; square gravity 10 0.1
+-- TYPE MISMATCH --------------- repl-temp-000.elm
+
+Function `square` is expecting 1 argument, but was given 3.
+
+4│   square gravity 10 0.1
+                    ^^^^^^
+Maybe you forgot some parentheses? Or a comma?</code>
+</div>
+</div>
+
+<a name="slide_20"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Functions - anonymous</h1>
+<code>&gt; sos = <em>\</em>x y <em>-&gt;</em> x^2 + y^2
+<function> : number -&gt; number -&gt; number
+
+&gt; sos 3 4
+25 : number
+</code>
+</div>
+</div>
+
+<a name="slide_21"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining functions</h1>
+<code>square n = n^2
+
+apply_twice f n = <em>f (f n)</em>
+
+&gt; apply_twice square 3
+81 : number
+</code>
+</div>
+</div>
+
+<a name="slide_22"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining functions - currying</h1>
+<code>square_twice = apply_twice square
+
+&gt; square_twice 3
+81 : number
+</code>
+</div>
+</div>
+
+<a name="slide_23"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining functions - map</h1>
+<code>&gt; <em>List.map</em> square [1,2,3]
+[1,4,9] : List number
+
+&gt; <em>List.map</em> (\x -&gt; 2*x) [1,2,3]
+[2,4,6] : List number
+</code>
+</div>
+</div>
+
+<a name="slide_24"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types</h1>
+<code>x <em>: Int</em>
+x = 3
+</code>
+</div>
+</div>
+
+<a name="slide_25"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types</h1>
+<code>x <em>: Int</em>
+x = "a"
+<em>TYPE MISMATCH
+
+The type annotation for `x` does not match its definition.
+6| x : Int
+
+The type annotation is saying:
+
+    Int
+
+But I am inferring that the definition has this type:
+
+    String</em>
+</code>
+</div>
+</div>
+
+<a name="slide_26"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - records</h1>
+<code>p <em>: { name : String, age : Int }</em>
+p = { name = "Andy", age = 21 }
+</code>
+</div>
+</div>
+
+<a name="slide_27"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - functions</h1>
+<code>square <em>: Int -&gt; Int</em>
+square n = n^2
+</code>
+</div>
+</div>
+
+<a name="slide_28"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - functions</h1>
+<code>gravity <em>: Float -&gt; Float -&gt; Float</em>
+gravity v t = v - 9.81 * t
+</code>
+</div>
+</div>
+
+<a name="slide_29"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - functions</h1>
+<code>square : Int -&gt; Int
+square x = x^2
+
+apply_twice <em>: ( Int -&gt; Int ) -&gt; Int -&gt; Int</em>
+apply_twice f n = f (f n)
+
+square_twice : Int -&gt; Int
+square_twice = apply_twice square
+</code>
+</div>
+</div>
+
+<a name="slide_30"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - naming types</h1>
+<code><em>type alias</em> Ducks = Int
+<em>type alias</em> Elephants = Int
+
+x : Ducks
+x = 3
+
+y : Elephants
+y = 4
+
+&gt; x * y
+12
+</code>
+</div>
+</div>
+
+<a name="slide_31"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - naming types</h1>
+<code><em>type alias</em> Person =
+    { name : String
+    , age : Int
+    , scores : List Int
+    }
+
+twice_age : Person -&gt; Int
+twice_age p = p.age * 2
+</code>
+</div>
+</div>
+
+<a name="slide_32"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - record specs</h1>
+<code>bad_commit : <em>{ foo | lines : Int }</em> -&gt; Bool
+bad_commit c = c.lines &gt; 100
+
+&gt; bad_commit { files=["a.cpp","b.elm"], lines=200 }
+True
+</code>
+</div>
+</div>
+
+<a name="slide_33"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - case of names</h1>
+<ul>
+    <li>Type names start with a capital (e.g. Int)</li>
+    <li>Generic param names start with lowercase (e.g. List a)</li>
+</ul>
+</div>
+</div>
+
+<a name="slide_34"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Types - generic types</h1>
+<code>repeats : List <em>a</em> -&gt; List <em>a</em>
+repeats xs =
+    case xs of
+        h :: t -&gt;
+            h :: h :: (repeats t)
+
+        [] -&gt;
+            []
+
+
+&gt; repeats [1,2,3]
+[1,1,2,2,3,3]
+</code>
+</div>
+</div>
+
+<a name="slide_35"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining types</h1>
+<code><em>type</em> Drink = Coffee <em>|</em> Tea
+
+enjoy : Drink -&gt; String
+enjoy drink =
+    case drink of
+        Coffee -&gt; "whoosh"
+        Tea -&gt; "aaah"
+</code>
+</div>
+</div>
+
+<a name="slide_36"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining types</h1>
+<code>type Status = Available | Busy String | Away Int
+
+&gt; a = <em>Available</em>
+Available : Repl.Status
+
+&gt; b = <em>Busy "in a meeting"</em>
+Busy ("in a meeting") : Repl.Status
+
+&gt; w = <em>Away 13</em>
+Away 13 : Repl.Status
+</code>
+</div>
+</div>
+
+<a name="slide_37"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Combining types</h1>
+<code>report : Status -&gt; String
+report status = case status of
+    <em>Available</em> -&gt; "is available now"
+    <em>Busy msg</em> -&gt; "is " ++ msg
+    <em>Away m</em> -&gt; "back in " ++ (toString m) ++ " mins"
+
+&gt; status b
+"is in a meeting" : String
+
+&gt; status w
+"back in 13 mins" : String
+</code>
+</div>
+</div>
+
+<a name="slide_38"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Comments</h1>
+<code><em>--</em> Single-line comment
+
+<em>{-</em> multi-line
+   comments
+   <em>{-</em> nestable <em>-}</em>
+<em>-}</em>
+</code>
+</div>
+</div>
+
+
+<!--a name="slide_39"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Discussion</h1>
+</div>
+</div-->
+
+<a name="slide_39"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Donate</h1>
+<table class="moreinfo">
+    <tr>
+        <th>Donate!</th>
+        <td><a href="https://www.patreon.com/andybalaam">patreon.com/andybalaam</a></td>
+    </tr>
+</table>
+</div>
+</div>
+
+<a name="slide_40"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>Play</h1>
+<table class="moreinfo" style="width: 95%;">
+    <tr>
+        <th>Play!</th>
+        <td><a href="http://artificialworlds.net/rabbit-escape/">artificialworlds.net/rabbit-escape</a></td>
+    </tr>
+</table>
+<div class="image"><img src="rabbitescape.gif"/></div>
+</div>
+</div>
+
+<a name="slide_41"></a>
+<div class="slide">
+<div class="slide_body">
+<h1>More info</h1>
+<table class="moreinfo">
+    <tr>
+        <th>Videos</th>
+        <td><a href="http://www.youtube.com/user/ajbalaam">youtube.com/user/ajbalaam</a></td>
+    </tr>
+    <tr>
+        <th>Twitter</th>
+        <td><a href="http://twitter.com/andybalaam">@andybalaam</a></td>
+    </tr>
+    <tr>
+        <th>Blog</th>
+        <td><a href="http://www.artificialworlds.net/blog">artificialworlds.net/blog</a></td>
+    </tr>
+    <tr>
+        <th>Projects </th>
+        <td><a href="http://www.artificialworlds.net">artificialworlds.net</a></td>
+    </tr>
+</table>
+</div>
+</div>
+
+</body>
+
+</html>
+
+
