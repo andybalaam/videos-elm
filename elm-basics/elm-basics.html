@@ -89,7 +89,7 @@ Source: <a href="https://github.com/andybalaam/videos-elm">github.com/andybalaam
 <code>&gt; ["a","d","x"]
 <em>["a","d","x"]</em> : List String
 
-&gt; [1..4]
+&gt; List.range 1 4
 <em>[1,2,3,4]</em> : List number
 
 &gt; []
@@ -160,11 +160,11 @@ True : Bool
 &gt; <em>not</em> <em>False</em>
 True : Bool
 
-&gt; 80 <em>==</em> 8 <em>||</em> 6 <em>&gt;=</em> 6
+&gt; 6 <em>&gt;=</em> 6 <em>||</em> 80 <em>==</em> 8
 True : Bool
 
 &gt; 5 <em>/=</em> 6
-True : bool
+True : Bool
 </code>
 </div>
 </div>
@@ -621,5 +621,3 @@ report status = case status of
 </body>
 
 </html>
-
-
