@@ -553,10 +553,10 @@ report status = case status of
     <em>Busy msg</em> -&gt; "is " ++ msg
     <em>Away m</em> -&gt; "back in " ++ (toString m) ++ " mins"
 
-&gt; status b
+&gt; report b
 "is in a meeting" : String
 
-&gt; status w
+&gt; report w
 "back in 13 mins" : String
 </code>
 </div>
